@@ -13,7 +13,7 @@ type Config struct {
 	} `json:"server"`
 }
 
-func getEnvVars(filePath string) (Config, error) {
+func GetEnvVars(filePath string) (Config, error) {
 	var env Config
 	f, err := ioutil.ReadFile(filepath.Clean(filePath))
 	if err != nil {
