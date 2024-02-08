@@ -2,12 +2,20 @@ package cmd
 
 import (
 	"encoding/json"
-	"file"
+	"io/ioutil"
+	"path/filepath"
 )
 
-func getEnvVars(filePath string) (EnvVars, error) {
-	var env EnvVars
-	f, err := file.ReadFile(filePath)
+type Config struct {
+	Server struct {
+		Port string `json:"port"`
+		Host string `json:"host"`
+	} `json:"server"`
+}
+
+func getEnvVars(filePath string) (Config, error) {
+	var env Config
+	f, err := ioutil.ReadFile(filepath.Clean(filePath))
 	if err != nil {
 		return env, err
 	}
